@@ -5,6 +5,7 @@ class Interpreter<OutputStreamType: TextOutputStream, ErrStreamType: TextOutputS
     private var nodes: Tree
     private var ptr: Int = 0
     private var arr = [UInt8](repeating: 0, count: 30_000)
+    /// The greatest integer that can be stored in a cell
     private let maxCell = UInt8(2^^8 - 1)
     /// The position in the source code
     private var codePos = Position(row: -1, col: -1)
@@ -30,6 +31,7 @@ extension Interpreter {
         while let node = iter.next() {
             switch node {
                 case .Increment(pos: let pos):
+                    // print("increment", self.arr[self.ptr])
                     self.codePos = pos
                     self.execIncrement()
                 case .Decrement(pos: let pos):
@@ -74,7 +76,7 @@ extension Interpreter {
         if self.ptr == 0 {
             self.ptr = 29_999
         } else {
-            self.ptr += 1
+            self.ptr -= 1
         }
     }
 
