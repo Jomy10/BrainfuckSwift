@@ -18,4 +18,10 @@
 // --comments OR -c // Don't execute everything after ;;
 // --comments="//" // Don't execute everything after //
 
+// --number-mode // Show numbers as output instead of text
+
 // --help or -h
+
+func main() {
+    /*...*/
+}

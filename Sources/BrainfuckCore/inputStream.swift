@@ -10,6 +10,10 @@ public protocol InputStream {
 /// Standard input stream
 public struct StdInStream: InputStream {
     public var buffer: String = ""
+
+    public init() {}
+    public init(_ buffer: String) { self.buffer = buffer }
+
     public mutating func requestNextChar() throws -> UInt8 {
         if buffer.isEmpty {
             self.readMore()

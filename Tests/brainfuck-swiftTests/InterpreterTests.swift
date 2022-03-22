@@ -1,6 +1,6 @@
 import XCTest
 import Foundation
-@testable import brainfuck_swift
+@testable import BrainfuckCore
 
 final class InterpreterTests: XCTestCase {
     func testCat() throws {

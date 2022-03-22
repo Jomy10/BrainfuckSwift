@@ -5,18 +5,24 @@ import PackageDescription
 
 let package = Package(
     name: "brainfuck-swift",
-    dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
+    products: [
+        .executable(name: "Brainfuck", targets: ["BrainfuckCLI"]),
+        .library(name: "BrainfuckCore", targets: ["BrainfuckCore"]),
+        .library(name: "BrainfuckRun", targets: ["BrainfuckRun"]),
     ],
+    dependencies: [],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages this package depends on.
-        .executableTarget(
-            name: "brainfuck-swift",
+        .target(
+            name: "BrainfuckCore", 
             dependencies: []),
+        .target(
+            name: "BrainfuckRun",
+            dependencies: []),
+        .executableTarget(
+            name: "BrainfuckCLI",
+            dependencies: ["BrainfuckCore", "BrainfuckRun"]),
         .testTarget(
             name: "brainfuck-swiftTests",
-            dependencies: ["brainfuck-swift"]),
+            dependencies: ["BrainfuckCore", "BrainfuckRun", "BrainfuckCLI"]),
     ]
 )

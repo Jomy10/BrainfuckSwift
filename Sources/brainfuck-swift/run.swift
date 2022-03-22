@@ -1,2 +1,0 @@
-// Run brainfuck interpreter
-// TODO

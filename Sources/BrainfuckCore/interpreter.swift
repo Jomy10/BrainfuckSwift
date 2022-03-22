@@ -1,7 +1,7 @@
 // print(“\(#file):\(#function):\(#line) — Hey!”)
 
 /// Executes the brainfuck ``Tree``
-class Interpreter<OutputStreamType: TextOutputStream, ErrStreamType: TextOutputStream, InputStreamType: InputStream> {
+public class Interpreter<OutputStreamType: TextOutputStream, ErrStreamType: TextOutputStream, InputStreamType: InputStream> {
     private var nodes: Tree
     private var ptr: Int = 0
     private var arr = [UInt8](repeating: 0, count: 30_000)
@@ -119,6 +119,10 @@ extension Interpreter {
 
 public struct InterpretOptions {
     public var options: Set<InterpretOption>
+
+    public init(options: Set<InterpretOption>) {
+        self.options = options
+    }
 
     public var visualInput: Bool {
         get { self.options.contains(.visualInput) }

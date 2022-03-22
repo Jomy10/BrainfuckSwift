@@ -1,7 +1,7 @@
 import XCTest
 import class Foundation.Bundle
 
-@testable import brainfuck_swift
+@testable import BrainfuckCLI
 
 final class brainfuck_swiftTests: XCTestCase {
     //func testExample() throws {

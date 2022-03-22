@@ -1,5 +1,5 @@
 import XCTest
-@testable import brainfuck_swift
+@testable import BrainfuckCore
 
 final class TreeTests: XCTestCase {
     func testTreeGen() {
