@@ -8,6 +8,11 @@
 import Foundation
 import BrainfuckCore
 @_exported import struct BrainfuckCore.InterpretOptions
+@_exported import enum BrainfuckCore.InterpretOption
+@_exported import protocol BrainfuckCore.InputStream
+@_exported import struct BrainfuckCore.FileHandleOutputStream
+@_exported import struct BrainfuckCore.StdInStream
+@_exported import struct BrainfuckCore.StringInputStream
 
 /// Run the brainfuck interpreter for the ``source`` code with the given ``options``
 public func run<OutputStreamType: TextOutputStream, ErrStreamType: TextOutputStream, InputStreamType: BrainfuckCore.InputStream>(
