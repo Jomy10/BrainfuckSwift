@@ -7,7 +7,7 @@ let package = Package(
     name: "brainfuck-swift", 
     platforms: [.macOS(.v10_12)],
     products: [
-        .executable(name: "Brainfuck", targets: ["BrainfuckCLI"]),
+        .executable(name: "brainfuck", targets: ["BrainfuckCLI"]),
         .library(name: "BrainfuckCore", targets: ["BrainfuckCore"]),
         .library(name: "BrainfuckRun", targets: ["BrainfuckRun"])
     ],

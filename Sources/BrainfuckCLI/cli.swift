@@ -38,7 +38,7 @@ import struct BrainfuckCore.StringInputStream
 struct BrainfuckCLI: ParsableCommand {
     static var configuration = CommandConfiguration(
         abstract: "A brianfuck interpreter",
-        version: "0.1.0",
+        version: "1.0.0",
         subcommands: [Run.self]
     )
 }
