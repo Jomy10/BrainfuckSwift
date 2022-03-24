@@ -8,6 +8,7 @@ public protocol InputStream {
 }
 
 /// Standard input stream
+// TODO: pipe input stream https://stackoverflow.com/questions/33239745/swift-reading-piped-input
 public struct StdInStream: InputStream {
     public var buffer: String = ""
 
@@ -26,7 +27,7 @@ public struct StdInStream: InputStream {
         }
     }
     public mutating func readMore() {
-        self.buffer.append(readLine()!)
+        self.buffer.append(readLine() ?? "")
     }
 
     public func hasMoreStored() -> Bool {
@@ -46,7 +47,7 @@ public struct StringInputStream: InputStream {
     public var buffer: String = ""
     private var iter: String.Iterator
 
-    init(_ s: String) {
+    public init(_ s: String) {
         self.buffer = s
         self.iter = self.buffer.makeIterator()
     }

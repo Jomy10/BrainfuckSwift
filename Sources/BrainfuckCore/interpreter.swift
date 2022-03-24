@@ -4,7 +4,7 @@
 public class Interpreter<OutputStreamType: TextOutputStream, ErrStreamType: TextOutputStream, InputStreamType: InputStream> {
     private var nodes: Tree
     private var ptr: Int = 0
-    private var arr = [UInt8](repeating: 0, count: 30_000)
+    private var arr: [UInt8]
     /// The greatest integer that can be stored in a cell
     private let maxCell = UInt8(2^^8 - 1)
     /// The position in the source code
@@ -16,6 +16,7 @@ public class Interpreter<OutputStreamType: TextOutputStream, ErrStreamType: Text
     public init(tree: Tree, options: InterpretOptions = InterpretOptions(options: [])) {
         self.nodes = tree
         self.options = options
+        self.arr = [UInt8](repeating: 0, count: self.options.arraySize)
     }
 }
 
@@ -123,12 +124,57 @@ public struct InterpretOptions {
     public init(options: Set<InterpretOption>) {
         self.options = options
     }
-
+    /// Shows a '>' when asking for input
     public var visualInput: Bool {
         get { self.options.contains(.visualInput) }
     }
+    /// Set the size of the array (default: 30000)
+    public var arraySize: Int {
+        get {
+            var size = 30_000
+            _ = self.options.first(where: { 
+                if case let .arraySize(size: val) = $0 {
+                    size = val
+                    return true
+                } else {
+                    return false
+                }
+            }) 
+            return size
+        }
+    }
+    /// Show the array while the program is executing
+    public var visualArray: Bool { 
+        get { self.options.contains(.visualArray) }
+    }
+    /// Show where the program is in the source code
+    public var visualExecution: Bool {
+        get { self.options.contains(.visualExecution) }
+    }
+    /// Leave the previous array and/or line in the program (if set with --visual-array and --visual-execution) instead of overwriting
+    public var visualDebugDontErase: Bool {
+        get { self.options.contains(.visualDebugDontErase) }
+    }
+    // TODO
 }
 
-public enum InterpretOption {
+public enum InterpretOption: Hashable {
+    /// Shows a '>' when asking for input
     case visualInput
+    /// Set the size of the array (default: 30000)
+    case arraySize(size: Int)
+    /// Show the array while the program is executing
+    case visualArray
+    /// Show where the program is in the source code
+    case visualExecution
+    /// Leave the previous array and/or line in the program (if set with --visual-array and --visual-execution) instead of overwriting
+    case visualDebugDontErase
+    /// Execute the program step by step. Only continue to the next command when return is pressed
+    case stepDebug
+    /// Sets the amount of bits that can be stored in a cell (default: 8)
+    case cellSize(size: Int)
+    /// Don't execute code after ';;', or after custom comment syntax
+    case comments(syntax: String)
+    /// Shows cells as numbers in output instead of text
+    case numberMode
 }

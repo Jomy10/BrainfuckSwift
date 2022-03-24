@@ -4,23 +4,27 @@
 import PackageDescription
 
 let package = Package(
-    name: "brainfuck-swift",
+    name: "brainfuck-swift", 
+    platforms: [.macOS(.v10_12)],
     products: [
         .executable(name: "Brainfuck", targets: ["BrainfuckCLI"]),
         .library(name: "BrainfuckCore", targets: ["BrainfuckCore"]),
-        .library(name: "BrainfuckRun", targets: ["BrainfuckRun"]),
+        .library(name: "BrainfuckRun", targets: ["BrainfuckRun"])
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/apple/swift-argument-parser", branch: "main"),
+        .package(url: "https://github.com/andybest/linenoise-swift", branch: "master")
+    ],
     targets: [
         .target(
             name: "BrainfuckCore", 
-            dependencies: []),
+            dependencies: [.product(name: "LineNoise", package: "linenoise-swift")]),
         .target(
             name: "BrainfuckRun",
-            dependencies: []),
+            dependencies: ["BrainfuckCore"]),
         .executableTarget(
             name: "BrainfuckCLI",
-            dependencies: ["BrainfuckCore", "BrainfuckRun"]),
+            dependencies: ["BrainfuckCore", "BrainfuckRun", .product(name: "ArgumentParser", package: "swift-argument-parser")]),
         .testTarget(
             name: "brainfuck-swiftTests",
             dependencies: ["BrainfuckCore", "BrainfuckRun", "BrainfuckCLI"]),
