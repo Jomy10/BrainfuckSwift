@@ -98,7 +98,7 @@ struct Run: ParsableCommand {
             let sourceCodeString = try NSString(contentsOfFile: self.options.file, encoding: String.Encoding.utf8.rawValue) as String
             switch inStream {
             case .StdIn(stream: let inS):
-                try BrainfuckRun.run(
+                BrainfuckRun.run(
                     source: sourceCodeString, 
                     options: interpretOpts,
                     outStream: &stdout,
@@ -106,7 +106,7 @@ struct Run: ParsableCommand {
                     inStream: inS
                 )
             case .String(stream: let inS):      
-                try BrainfuckRun.run(
+                BrainfuckRun.run(
                     source: sourceCodeString,
                     options: interpretOpts,
                     outStream: &stdout,

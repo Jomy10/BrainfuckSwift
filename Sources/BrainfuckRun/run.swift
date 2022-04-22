@@ -21,7 +21,7 @@ public func run<OutputStreamType: TextOutputStream, ErrStreamType: TextOutputStr
     outStream out: inout OutputStreamType,
     errStream err: inout ErrStreamType,
     inStream ins: InputStreamType
-) throws {
+) {
     let tokens = Tokenizer.tokenize(source: source)
     var tokenIter = tokens.makeIterator()
     let tree = Tree(tokens: &tokenIter)

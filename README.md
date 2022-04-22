@@ -13,9 +13,9 @@ Hello world
 ```
 
 **Download**
-You can download the CLI for macOS from the [releases](https://github.com/Jomy10/BrainfuckSwift/releases).
+You can download the CLI for macOS and Linux from the [releases](https://github.com/Jomy10/BrainfuckSwift/releases).
 
-Alternatively, you can compile the binary yourself (works on Linux as well!)
+Alternatively, you can compile the binary yourself:
 
 ```bash
 git clone https://github.com/Jomy10/BrainfuckSwift
@@ -58,7 +58,7 @@ var stdout = FileHandleOutputStream(FileHandle.standardOutput)
 var stderr = FileHandleOutputStream(FileHandle.standardError)
 let stdin = StdInStream()
 
-try BrainfuckRun.run(
+BrainfuckRun.run(
     source: "+[,.]", // Cat program as strin
     options: [.visualInput],
     outStream: &stdout,
